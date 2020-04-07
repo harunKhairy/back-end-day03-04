@@ -124,6 +124,19 @@ app.get("/products", (req, res) => {
         return res.status(200).send(newArr)  
     }
 })
+
+app.post("/products", (req, res) => {
+    arrProd.push ( { ...req.body, id:arrProd.length + 1 } )
+    res.send (arrProd)
+})
+app.put("/products/:id", ( req, res ) => {
+    arrProd [ req.params.id - 1 ] = { ...arrProd [ req.params.id - 1 ], ...req.body }
+    res.send(arrProd)
+})
+app.delete ("/products/:id", ( req, res ) => {
+    arrProd.splice(req.params.id - 1, 1)
+    res.send (arrProd)
+} )
 //// app.get("/users", (req, res) => {
 ////     console.log(req.query)
 ////     res.send (`<h2>data username adalah ${req.query.password}</h2>`)
